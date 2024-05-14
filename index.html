@@ -5,7 +5,7 @@
   <script>
     async function testConnectivity(domain) {
       try {
-        const timeout = 2000; // 设置超时时间,单位为毫秒
+        const timeout = 1000; // 设置超时时间,单位为毫秒
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), timeout);
 
