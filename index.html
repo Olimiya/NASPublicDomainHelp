@@ -18,7 +18,7 @@
     }
 
     async function redirectToDomain() {
-      const domainString = 'p.olimi.icu,p1.olimi.icu';
+      const domainString = {{ DOMAIN_LIST }};
       if (!domainString) {
         alert('没有配置可用的域名!');
         return;
