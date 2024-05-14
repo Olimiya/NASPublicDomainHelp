@@ -28,7 +28,7 @@
       for (const domain of domains) {
         const isReachable = await testConnectivity(domain);
         if (isReachable) {
-          window.location.href = `http://${domain}`;
+          window.location.href = `https://${domain}`;
           return;
         }
       }
