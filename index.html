@@ -18,7 +18,7 @@
     }
 
     async function redirectToDomain() {
-      const domainString = {{ DOMAIN_LIST }};
+      const domainString = '__NEXT_PUBLIC_DOMAIN_LIST__';
       if (!domainString) {
         alert('没有配置可用的域名!');
         return;
