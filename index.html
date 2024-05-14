@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic Domain Redirection</title>
+  <script>
+    async function testConnectivity(domain) {
+      try {
+        const timeout = 1000; // 设置超时时间,单位为毫秒
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+        const response = await fetch(`http://${domain}`, { signal: controller.signal });
+        clearTimeout(timeoutId);
+        return response.ok;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    async function redirectToDomain() {
+      const domainString = process.env.DOMAIN_LIST;
+      if (!domainString) {
+        alert('没有配置可用的域名!');
+        return;
+      }
+      const domains = domainString.split(',');
+
+      for (const domain of domains) {
+        const isReachable = await testConnectivity(domain);
+        if (isReachable) {
+          window.location.href = `http://${domain}`;
+          return;
+        }
+      }
+
+      alert('无法连接到任何可用的域名！如果不是在局域网环境中,请考虑打开P2P(TailScale)软件。');
+    }
+
+    window.onload = function() {
+      redirectToDomain();
+    };
+  </script>
+</head>
+<body>
+  <h1>Redirecting...</h1>
+  <p>You will be redirected to the appropriate domain based on your network environment.</p>
+</body>
+</html>
